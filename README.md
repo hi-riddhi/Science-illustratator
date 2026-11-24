@@ -1,234 +1,193 @@
-# Science Diagram Maker
+# AI-Powered Science Diagram Maker
 
-An AI-powered web application that generates educational science diagrams as animated SVGs. The application uses AI to create diagrams, validates the generated SVG markup, and allows reviewers to approve or reject each result with notes.
+An AI-powered Python Flask web application that generates animated science diagrams as SVGs, validates them automatically, and provides an interactive reviewer dashboard to approve or reject the generated diagrams.
 
-## 1. Project Overview
+## 1. Technology Stack
 
-The Science Diagram Maker generates diagrams for five educational concepts:
+| Component | Technology |
+|---|---|
+| Backend | Python 3, Flask |
+| Frontend | HTML5, CSS3, JavaScript |
+| Diagram generation | SVG, CSS animations |
+| AI provider | Groq API – GPT-OSS 120B |
+| Additional AI integration | Google Gemini API |
+| Validation | XML parsing and custom SVG validation |
+| Data storage | JSON (`results.json`) |
+| API communication | REST APIs |
+| Production server | Gunicorn |
+| Deployment | Render |
+| Version control | Git and GitHub |
 
-1. Pythagoras' theorem
-2. Parts of a circle
-3. Series circuit
+## 2. Features
+
+- Generates animated SVG science diagrams using AI.
+- Supports five predefined science concepts.
+- Validates SVG XML structure and drawing boundaries.
+- Checks for a title, at least three text labels, and animation.
+- Performs custom security checks on generated SVG content.
+- Retries generation once when SVG validation fails, using validation feedback.
+- Handles temporary API errors (429 and 503) with retry logic.
+- Tracks model name, token usage, estimated cost, and retries.
+- Displays validation results and diagrams in a web dashboard.
+- Allows reviewers to approve or reject diagrams with notes.
+- Saves generation results and review decisions in `results.json`.
+- Allows individual concept generation through the interface.
+
+## 3. Science Concepts
+
+1. Pythagoras' Theorem
+2. Parts of a Circle
+3. Series Circuit
 4. Photosynthesis
-5. States of matter
+5. States of Matter
 
-Each generated diagram is checked for SVG validity, required labels, animation, drawing boundaries and basic security restrictions.
-
-## 2. Technology Stack
-
-- **Backend:** Python, Flask
-- **Frontend:** HTML, CSS, JavaScript
-- **AI providers:** Google Gemini and Groq
-- **AI model currently configured:** `openai/gpt-oss-120b` through Groq
-- **SVG validation:** Python XML parsing and custom validation rules
-- **Data storage:** JSON (`results.json`)
-
-## 3. Project Structure
-
-```text
-ProjectSVG2/
-│
-├── app.py
-├── generator.py
-├── validator.py
-├── concepts.py
-├── prompts.py
-├── run_gen.py
-├── results.json
-│
-├── templates/
-│   └── index.html
-│
-├── static/
-│   ├── style.css
-│   └── script.js
-│
-├── requirements.txt
-├── README.md
-├── .env
-└── .gitignore
-```
-
-## 4. Features
-
-### AI Diagram Generation
-- Generates SVG diagrams using a selected AI provider.
-- Supports Gemini and Groq through an environment configuration.
-- Uses concept-specific prompts.
-- Requests one correction attempt if SVG validation fails.
-
-### SVG Validation
-- Checks whether the SVG is valid XML.
-- Checks for a valid SVG root and viewBox.
-- Checks drawing boundaries.
-- Requires a title and at least three text labels.
-- Checks for animation.
-- Applies custom security and unsupported-element checks.
-
-### Reviewer Workflow
-- Displays generated diagrams.
-- Allows reviewers to approve or reject diagrams.
-- Supports reviewer notes.
-- Saves review decisions in `results.json`.
-
-### Usage Tracking
-Records:
-- AI provider and model
-- Input tokens
-- Output tokens
-- Estimated API cost
-- API retries
-- Validation retries
-- Validation results
-
-## 5. Installation and Setup
+## 4. Run Locally
 
 ### Prerequisites
 
 - Python 3.10 or later
-- pip
-- An API key for the selected AI provider
+- Git
+- A Groq API key
 
-### Create a virtual environment
+### Step 1: Clone the repository
+
+```bash
+git clone https://github.com/YOUR-USERNAME/science-diagram-maker.git
+cd science-diagram-maker
+```
+
+### Step 2: Create a virtual environment
+
+Windows:
 
 ```powershell
 python -m venv venv
-```
-
-Activate it on Windows:
-
-```powershell
 venv\Scripts\activate
 ```
 
-### Install dependencies
+Mac/Linux:
 
-```powershell
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### Step 3: Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-### Configure environment variables
+### Step 4: Configure environment variables
 
-Create a `.env` file in the project root.
-
-For Groq:
+Create a `.env` file in the project root:
 
 ```env
 AI_PROVIDER=groq
 GROQ_API_KEY=your_groq_api_key
 GROQ_MODEL=openai/gpt-oss-120b
-```
 
-For Gemini:
-
-```env
-AI_PROVIDER=gemini
 GEMINI_API_KEY=your_gemini_api_key
 GEMINI_MODEL=your_gemini_model
 ```
 
-Never commit `.env` or expose API keys publicly.
+Only the API key for the selected provider is required.
 
-## 6. Run the Application
+**Security:** Never commit `.env` or expose API keys in the repository.
 
-Start Flask:
+### Step 5: Run the application
 
-```powershell
+```bash
 python app.py
 ```
 
-Open the application:
+Open the application in your browser:
 
 ```text
 http://127.0.0.1:5000
 ```
 
-The application provides endpoints:
+## 5. Results
 
-| Endpoint | Purpose |
+The following table reflects the confirmed testing status. Exact token, cost, and retry figures should be taken from the corresponding records in `results.json`.
+
+| Concept | Result | Estimated Cost (USD) | Retries |
+|---|---|---:|---:|
+| Pythagoras' Theorem | PASS | See results.json | See results.json |
+| Parts of a Circle | PASS | — | — |
+| Series Circuit | PASS | — | — |
+| Photosynthesis | PASS | — | — |
+| States of Matter | PASS | — | — |
+
+The application records generation metadata, including provider, model, token usage, estimated cost, API retries, validation retries, and individual validation checks.
+
+## 6. Issues Encountered and Fixes
+
+| Issue | Resolution |
 |---|---|
-| `/` | Main application |
-| `/api/concepts` | Lists the five concepts |
-| `/api/results` | Returns saved results |
-| `/api/generate/<id>` | Generates one diagram |
-| `/api/review/<id>` | Saves reviewer decisions |
+| Gemini API returned HTTP 503 due to temporary high demand. | Added retry handling and integrated Groq as an alternative AI provider. |
+| Provider configuration was not loading as expected. | Corrected environment variable configuration and provider selection. |
+| Empty `results.json` caused a JSON decoding error. | Initialized the file with an empty JSON array and added safer loading logic. |
+| Python syntax error in the Flask application. | Corrected the route definition and verified Python compilation. |
+| Frontend JavaScript errors during integration. | Replaced the affected JavaScript with a clean implementation and verified the application endpoints. |
+| API generation could consume unnecessary credits during testing. | Used offline checks and a controlled single-concept generation test before proceeding. |
 
-## 7. Run Batch Generation
+## 7. AI Tools Used
 
-To generate concepts through the Python batch workflow:
+### Groq – GPT-OSS 120B
+Used as the primary AI generation provider to generate SVG science diagrams from structured concept prompts.
 
-```powershell
-python run_gen.py
-```
+### Google Gemini
+Integrated as an additional AI provider and used during initial API integration and generation testing.
 
-Previously generated successful results are skipped by the batch workflow.
+AI-generated SVG output is treated as untrusted input and passed through the application's validation checks before being presented for review.
 
-## 8. Results and Data Storage
+## 8. What I Would Do With One More Day
 
-Generated diagrams and their metadata are stored in:
+With another day of development, I would focus on:
+
+1. **Improve SVG validation:** Add more robust geometric boundary checks, text visibility checks, and animation validation.
+2.**Expand automated testing:** Add unit tests for validation, API error handling, and reviewer workflows.
+3.**Improve persistence:** Replace local JSON storage with a database such as PostgreSQL for reliable deployed data persistence.
+5. **Improve the reviewer experience:** Add clearer validation feedback, generation history, and better error reporting.
+6. **Optimize AI usage:** Compare model output quality, token usage, response time, and generation costs.
+
+## 9. Project Structure
 
 ```text
-results.json
+science-diagram-maker/
+│
+├── app.py
+├── generator.py
+├── validator.py
+├── prompts.py
+├── concepts.py
+├── run_gen.py
+├── results.json
+├── requirements.txt
+├── .env
+├── .gitignore
+│
+├── templates/
+│   └── index.html
+│
+└── static/
+    ├── style.css
+    └── script.js
 ```
 
-The file contains SVG markup, validation results, model information, token usage, estimated cost, retry counts and reviewer decisions.
+## 10. Deployment
 
-Results are stored locally in JSON format.
+The application is deployed as a Python Web Service on Render.
 
-## 9. Testing Performed
+- Build command: `pip install -r requirements.txt`
+- Start command: `gunicorn app:app`
+- AI credentials are configured through Render environment variables.
 
-### Completed checks
-
-- Python syntax compilation.
-- Python module import verification.
-- Results JSON loading.
-- Flask homepage response.
-- Concepts API response.
-- Results API response.
-- Five concepts returned successfully.
-- Frontend loading.
-- Groq provider configuration.
-- One live Groq diagram generation.
-- SVG validation passed for the generated Pythagoras diagram.
-- Reviewer approval/rejection workflow tested.
-
-### Remaining verification
-
-- Generate and validate the other four concepts.
-- Complete final cross-browser and UI checks.
-- Verify reviewer notes persist after refresh.
-- Test deployment and production configuration.
-
-## 10. Known Limitations
-
-- AI-generated SVGs may require correction if they fail validation.
-- Free API tiers have rate limits and availability restrictions.
-- SVG validation checks geometry and markup but cannot guarantee perfect visual or scientific accuracy.
-- JSON storage is suitable for this assignment but is not intended for concurrent multi-user production use.
-- Local JSON data must be migrated to persistent storage for a reliable hosted deployment.
-
-## 11. Future Improvements
-
-With additional development time, the application could include:
-
-- Database-backed result storage.
-- User authentication and reviewer roles.
-- More detailed scientific accuracy checks.
-- Additional educational concepts.
-- More robust SVG rendering and sanitization.
-- Deployment monitoring and error logging.
-- Automated tests for backend and frontend workflows.
-
-## 12. Security
-
-- API keys are stored in `.env`.
-- `.env` and the virtual environment are excluded through `.gitignore`.
-- API keys must be configured as deployment environment variables.
-- Never expose provider credentials in frontend JavaScript.
 
 ---
 
-**Project:** Science Diagram Maker  
-**Purpose:** AI-assisted educational diagram generation and review  
-**Backend:** Flask  
-**AI providers:** Gemini and Groq
+**Project:** AI-Powered Science Diagram Maker  
+**Backend:** Python / Flask  
+**AI Generation:** Groq GPT-OSS 120B  
+**Deployment:** Render
