@@ -1,0 +1,48 @@
+[
+    {
+        "concept": "Pythagoras' theorem",
+        "subject": "Maths",
+        "model": "openai/gpt-oss-120b",
+        "provider": "groq",
+        "svg": "<svg viewBox=\"0 0 800 600\" width=\"800\" height=\"600\" xmlns=\"http://www.w3.org/2000/svg\">\n  <title>Pythagoras' Theorem Illustration</title>\n  <style>\n    .hypSquare {\n      fill: #ffcc80;\n      stroke: #b8860b;\n      stroke-width: 2;\n      animation: pulse 3s infinite;\n    }\n    @keyframes pulse {\n      0% { fill-opacity: 0.6; }\n      50% { fill-opacity: 1; }\n      100% { fill-opacity: 0.6; }\n    }\n    .label {\n      font-family: Arial, Helvetica, sans-serif;\n      font-size: 24px;\n      fill: #000;\n    }\n    .sideLabel {\n      font-size: 20px;\n      fill: #333;\n    }\n    .movingBox {\n      fill: #4a90e2;\n    }\n  </style>\n\n  <!-- Squares on the legs -->\n  <!-- Square on side a (vertical) -->\n  <rect x=\"350\" y=\"170\" width=\"180\" height=\"180\" fill=\"#add8e6\" stroke=\"#4682b4\" stroke-width=\"2\"/>\n  <text x=\"380\" y=\"260\" class=\"label\">a²</text>\n\n  <!-- Square on side b (horizontal) -->\n  <rect x=\"110\" y=\"350\" width=\"240\" height=\"240\" fill=\"#ffb6c1\" stroke=\"#c71585\" stroke-width=\"2\"/>\n  <text x=\"180\" y=\"470\" class=\"label\">b²</text>\n\n  <!-- Square on the hypotenuse -->\n  <polygon points=\"110,350 350,170 530,410 290,590\" class=\"hypSquare\"/>\n  <text x=\"300\" y=\"460\" class=\"label\">c²</text>\n\n  <!-- Right‑angled triangle -->\n  <line x1=\"110\" y1=\"350\" x2=\"350\" y2=\"170\" stroke=\"#000\" stroke-width=\"4\"/>\n  <line x1=\"350\" y1=\"170\" x2=\"350\" y2=\"350\" stroke=\"#000\" stroke-width=\"4\"/>\n  <line x1=\"350\" y1=\"350\" x2=\"110\" y2=\"350\" stroke=\"#000\" stroke-width=\"4\"/>\n\n  <!-- Right‑angle marker -->\n  <polyline points=\"340,340 350,340 350,330\" fill=\"none\" stroke=\"#000\" stroke-width=\"2\"/>\n\n  <!-- Side labels -->\n  <text x=\"360\" y=\"260\" class=\"sideLabel\">a</text>\n  <text x=\"220\" y=\"380\" class=\"sideLabel\">b</text>\n  <text x=\"240\" y=\"260\" class=\"sideLabel\">c</text>\n\n  <!-- Animated moving box illustrating addition -->\n  <rect x=\"360\" y=\"260\" width=\"20\" height=\"20\" class=\"movingBox\">\n    <animate attributeName=\"x\" values=\"360;400\" dur=\"3s\" repeatCount=\"indefinite\" />\n    <animate attributeName=\"y\" values=\"260;460\" dur=\"3s\" repeatCount=\"indefinite\" />\n  </rect>\n</svg>",
+        "checks": {
+            "valid_svg": true,
+            "viewbox_bounds": true,
+            "title_and_labels": true,
+            "animation": true,
+            "custom_check": true
+        },
+        "passed": true,
+        "input_tokens": 428,
+        "output_tokens": 2416,
+        "estimated_cost_usd": 0.0,
+        "api_retries": 0,
+        "validation_retries": 0,
+        "retries": 0,
+        "review_status": "Rejected",
+        "review_note": "test rejection workflow"
+    },
+    {
+        "concept": "Photosynthesis",
+        "subject": "Biology",
+        "model": "openai/gpt-oss-120b",
+        "provider": "groq",
+        "svg": "<svg viewBox=\"0 0 800 600\" width=\"800\" height=\"600\" xmlns=\"http://www.w3.org/2000/svg\">\n  <title>Photosynthesis Diagram</title>\n  <style>\n    .sun { animation: pulse 3s infinite; }\n    @keyframes pulse {\n      0%   { fill: #ffeb3b; }\n      50%  { fill: #ff9800; }\n      100% { fill: #ffeb3b; }\n    }\n    .flow { stroke-dasharray: 10 5; animation: dashmove 1.5s linear infinite; }\n    @keyframes dashmove {\n      from { stroke-dashoffset: 0; }\n      to   { stroke-dashoffset: -15; }\n    }\n    text { font-family: sans-serif; fill: #333; }\n  </style>\n\n  <!-- Sun -->\n  <circle class=\"sun\" cx=\"100\" cy=\"100\" r=\"40\" fill=\"#ffeb3b\" />\n  <text x=\"70\" y=\"180\" font-size=\"20\">Sunlight</text>\n\n  <!-- Leaf -->\n  <ellipse cx=\"500\" cy=\"300\" rx=\"120\" ry=\"80\" fill=\"#7cfc00\" stroke=\"#2e8b57\" stroke-width=\"2\"/>\n  <text x=\"440\" y=\"300\" font-size=\"24\" font-weight=\"bold\">Glucose (C₆H₁₂O₆)</text>\n\n  <!-- CO2 source -->\n  <rect x=\"150\" y=\"120\" width=\"80\" height=\"40\" fill=\"#e0e0e0\" stroke=\"#999\" />\n  <text x=\"160\" y=\"145\" font-size=\"18\">CO₂</text>\n  <!-- Arrow CO2 -->\n  <line class=\"flow\" x1=\"230\" y1=\"140\" x2=\"380\" y2=\"250\" stroke=\"#000\" stroke-width=\"2\"/>\n  <polygon points=\"380,250 370,245 370,255\" fill=\"#000\"/>\n\n  <!-- H2O source -->\n  <ellipse cx=\"180\" cy=\"470\" rx=\"40\" ry=\"25\" fill=\"#add8e6\" stroke=\"#4682b4\"/>\n  <text x=\"155\" y=\"475\" font-size=\"18\">H₂O</text>\n  <!-- Arrow H2O -->\n  <line class=\"flow\" x1=\"220\" y1=\"470\" x2=\"380\" y2=\"350\" stroke=\"#000\" stroke-width=\"2\"/>\n  <polygon points=\"380,350 370,345 370,355\" fill=\"#000\"/>\n\n  <!-- O2 output -->\n  <line x1=\"620\" y1=\"300\" x2=\"750\" y2=\"200\" stroke=\"#000\" stroke-width=\"2\"/>\n  <polygon points=\"750,200 740,195 740,205\" fill=\"#000\"/>\n  <text x=\"660\" y=\"180\" font-size=\"18\">O₂</text>\n</svg>",
+        "checks": {
+            "valid_svg": true,
+            "viewbox_bounds": true,
+            "title_and_labels": true,
+            "animation": true,
+            "custom_check": true
+        },
+        "passed": true,
+        "input_tokens": 401,
+        "output_tokens": 1716,
+        "estimated_cost_usd": 0.0,
+        "api_retries": 0,
+        "validation_retries": 0,
+        "retries": 0,
+        "review_status": "Approved",
+        "review_note": "approve test "
+    }
+]

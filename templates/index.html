@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Diagram Maker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-icon">S</div>
+            <div>
+                <h1>Science Diagram Maker</h1>
+                <p>AI-powered educational diagrams</p>
+            </div>
+        </div>
+
+        <span class="status-indicator">Reviewer Workspace</span>
+    </header>
+
+    <main class="container">
+
+        <section class="intro">
+            <div>
+                <p class="eyebrow">DIAGRAM GENERATION WORKSPACE</p>
+                <h2>Science diagrams, made visual.</h2>
+                <p class="intro-description">
+                    Generate, validate and review educational diagrams
+                    for five core science and mathematics concepts.
+                </p>
+            </div>
+        </section>
+
+        <section class="summary-grid">
+            <div class="summary-card">
+                <span>Total concepts</span>
+                <strong id="total-count">5</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>Generated</span>
+                <strong id="generated-count">0</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>Approved</span>
+                <strong id="approved-count">0</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>Rejected</span>
+                <strong id="rejected-count">0</strong>
+            </div>
+        </section>
+
+        <section class="section-heading">
+            <div>
+                <h2>Diagram library</h2>
+                <p>Generate and review each educational concept.</p>
+            </div>
+
+            <button id="refresh-button" class="secondary-button">
+                Refresh results
+            </button>
+        </section>
+
+        <div id="global-error" class="error-message hidden"></div>
+
+        <section id="diagram-list" class="diagram-list">
+            <div class="loading">Loading concepts...</div>
+        </section>
+
+        <footer>
+            <p>Science Diagram Maker · AI-generated educational visuals</p>
+        </footer>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
