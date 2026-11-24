@@ -146,9 +146,9 @@ AI-generated SVG output is treated as untrusted input and passed through the app
 
 With another day of development, I would focus on:
 
-1. **Improve SVG validation:** Add more robust geometric boundary checks, text visibility checks, and animation validation.
-2.**Expand automated testing:** Add unit tests for validation, API error handling, and reviewer workflows.
-3.**Improve persistence:** Replace local JSON storage with a database such as PostgreSQL for reliable deployed data persistence.
+1. **Improve SVG validation:** I would improve selection criteria so that SVGs are more animated, and self-explanatory.
+2. **Expand automated testing:** Add unit tests for validation, API error handling, and reviewer workflows.
+3. **Improve persistence:** Replace local JSON storage with a database such as PostgreSQL for reliable deployed data persistence.
 5. **Improve the reviewer experience:** Add clearer validation feedback, generation history, and better error reporting.
 6. **Optimize AI usage:** Compare model output quality, token usage, response time, and generation costs.
 
@@ -187,7 +187,4 @@ The application is deployed as a Python Web Service on Render.
 
 ---
 
-**Project:** AI-Powered Science Diagram Maker  
-**Backend:** Python / Flask  
-**AI Generation:** Groq GPT-OSS 120B  
-**Deployment:** Render
+Thank you for review & suggestions ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧
