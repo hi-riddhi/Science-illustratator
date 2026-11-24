@@ -2,3 +2,4 @@ google-genai
 groq
 Flask
 python-dotenv
+gunicorn
